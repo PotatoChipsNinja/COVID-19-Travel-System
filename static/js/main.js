@@ -207,15 +207,7 @@ function DrawTransInfo(transInfo) {
       type: 'mapline',
       lineWidth: 2,
       color: Highcharts.getOptions().colors[i],
-      data: data,
-      events: {
-        hide: function () {
-          console.log("aaa");
-        },
-        show: function () {
-          console.log("bbb");
-        }
-      }
+      data: data
     });
   }
 }
@@ -232,7 +224,7 @@ function AddChart(travel) {
     name: travel.TravelerID,
     type: 'mappoint',
     lineWidth: 2,
-    color: Highcharts.getOptions().colors[3],
+    color: Highcharts.getOptions().colors[parseInt(travel.TravelerID.substring(2)) - 1],
     data: pointArr
   });
 
