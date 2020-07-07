@@ -112,6 +112,7 @@ func AddTravel(origin string, destination string, startTime int, timeLimit int) 
             remain -= graph[fromID].ArcList[arcIndex].Risk
         }
         path = reversePath(path)
+        path = mergePath(path)
         travelerNum++
         ans := Travel{"旅客" + strconv.Itoa(travelerNum), float32(risk) / 10, duration, 0, 0, path}
         status.TravelList = append(status.TravelList, ans)
@@ -138,6 +139,23 @@ func reversePath(s []Section) []Section {
     return s
 }
 
+// 将连续的“在某地停留”合并
+func mergePath(s []Section) []Section {
+    ans := []Section {s[0]}
+    last := s[0]
+    for i := 1; i < len(s); i += 1 {
+        if s[i].TransportType == "停留" && last.TransportType == "停留" {
+            ans[len(ans)-1].SectionRisk = ((ans[len(ans)-1].SectionRisk * 10) + (s[i].SectionRisk * 10)) / 10
+            ans[len(ans)-1].SectionDuration += s[i].SectionDuration
+        } else {
+            ans = append(ans, s[i])
+            last = s[i]
+        }
+    }
+    return ans
+}
+
+// 初始化时建图
 func CreateGraph() {
     vertexIndex = make(map[string]map[int]int)
     cityRisk = make(map[string]int)
