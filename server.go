@@ -55,7 +55,7 @@ func APIHandler(w http.ResponseWriter, req *http.Request) {
             timeLimit, _ := strconv.Atoi(query.Get("timeLimit"))
             w.Write(AddTravel(origin, destination, status.Time[0], timeLimit))
         case "/api/exit":
-            Log("系统已退出，您可以在log.txt中查看日志")
+            Log("系统已退出，您可以到log目录中查看日志")
             os.Exit(1)
     }
 }
