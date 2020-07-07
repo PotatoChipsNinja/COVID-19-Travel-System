@@ -46,7 +46,7 @@ function AddTravel() {
       $("#info-content").text("很遗憾，规划失败！");
       $("#infoModal").modal('show');
     } else {
-      $("#info-content").html("已成功为<strong>" + data.TravelerID + "</strong>规划旅程！<br>请在右侧“状态信息”面板种查看规划结果详情。");
+      $("#info-content").html("已成功为<strong>" + data.TravelerID + "</strong>规划旅程！<br>请在右侧“状态信息”面板中查看规划结果详情。");
       $("#infoModal").modal('show');
       Refresh();
     }
